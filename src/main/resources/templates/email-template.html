@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Yêu cầu đặt lại mật khẩu</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'/>
+
+    <!-- use the font -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 48px;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0;">
+<!--//align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;"-->
+<table >
+<!--    <tr>-->
+<!--        <td align="center" bgcolor="#78ab46" style="padding: 10px">-->
+<!--            <p>Đội ngũ StoryArt</p>-->
+<!--        </td>-->
+<!--    </tr>-->
+    <tr>
+<!--        //bgcolor="#eaeaea" style="padding: 10px 10px 10px 10px;"-->
+        <td >
+            <p th:text="${'Chào ' + user.name+','}"></p>
+            <p>
+                Chúng tôi đã nhận một yêu cầu đặt lại mật khẩu từ tài khoản StoryArt của bạn. Để đặt lại mật khẩu, vui lòng bấm vào đường dẫn dưới đây
+            <h3>Đặt lại mật khẩu</h3>
+                <a th:href="${resetUrl}" th:text="${resetUrl}"></a>
+            </p>
+            <p>Lưu ý: Đường dẫn này sẽ hết hạn trong 30 phút từ lúc gửi.</p>
+            <p>Nếu bạn đã không yêu cầu đặt lại mật khẩu, bạn có thể bỏ qua tin nhắn này và mật khẩu của bạn sẽ không bị thay đổi , có thể ai đó đã vô tình nhập email của bạn </p>
+            <p>Chúc bạn một ngày tốt lành. Cảm ơn!</p>
+        </td>
+    </tr>
+<!--    <tr>-->
+<!--        <td bgcolor="#FFFFFF"-->
+<!--            style="padding: 10px;"-->
+<!--        >-->
+<!--            <p th:text="${signature}"></p>-->
+<!--        </td>-->
+<!--    </tr>-->
+
+</table>
+
+</body>
+</html>
