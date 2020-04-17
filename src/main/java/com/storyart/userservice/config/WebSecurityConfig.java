@@ -96,6 +96,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/api/v1/reset-password").permitAll().
                 antMatchers(HttpMethod.GET,"/api/v1/reset-password/checkToken/**").permitAll().
                 antMatchers("/api/v2/api-docs").permitAll().
+                antMatchers("/actuator/**").permitAll().
                 antMatchers("/api/swagger-ui.html").permitAll().
 
 
