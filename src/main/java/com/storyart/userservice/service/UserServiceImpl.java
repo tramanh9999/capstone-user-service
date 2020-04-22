@@ -3,12 +3,13 @@ package com.storyart.userservice.service;
 import com.storyart.userservice.common.constants.RoleName;
 import com.storyart.userservice.dto.ResultDto;
 import com.storyart.userservice.dto.UserProfileDto;
+import com.storyart.userservice.exception.AppException;
 import com.storyart.userservice.exception.BadRequestException;
 import com.storyart.userservice.model.Role;
 import com.storyart.userservice.model.Story;
 import com.storyart.userservice.model.User;
 import com.storyart.userservice.payload.PagedResponse;
-import com.storyart.userservice.payload.PasswordChangeRequest;
+import com.storyart.userservice.payload.SignUpRequest;
 import com.storyart.userservice.payload.UserInManagementResponse;
 import com.storyart.userservice.payload.UserProfileUpdateRequest;
 import com.storyart.userservice.repository.RoleRepository;
@@ -23,9 +24,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
@@ -277,6 +278,29 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    public void register(SignUpRequest signUpRequest) {
+        if (findByUsername(signUpRequest.getUsername()) != null) {
+            throw new BadCredentialsException("Tên đăng nhập  này đã được đăng ký bởi ai đó!");
+        }
+        if (findByEmail(signUpRequest.getEmail()) != null) {
+            throw new BadRequestException("Email này đã được đăng ký bởi người khác");
+        }
+        User user = new User();
+        user.setActive(true);
+        user.setUsername(signUpRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
+        user.setName(signUpRequest.getName());
+        user.setEmail(signUpRequest.getEmail());
+        user.setIntroContent(signUpRequest.getIntro_content());
+        user.setAvatar(signUpRequest.getAvatar());
+
+        Role userRole = roleRepository.findRoleByName(RoleName.ROLE_USER)
+                .orElseThrow(() -> new AppException("Hiện tại chưa thể đăng ký! Vui lòng quay lại sau!"));
+        user.setRoleId(userRole.getId());
+        userRepository.save(user);
+    }
+
     private void validatePageNumberAndSize(int page, int size) {
         if (page < 0) {
             throw new BadRequestException("Trang không dưới 0");
@@ -340,8 +364,6 @@ public class UserServiceImpl implements UserService {
 
     }
 //todo add admin user method
-
-
 
 
 }

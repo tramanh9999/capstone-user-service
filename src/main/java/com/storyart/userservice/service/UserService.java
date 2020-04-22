@@ -1,13 +1,9 @@
 package com.storyart.userservice.service;
 
 import com.storyart.userservice.dto.ResultDto;
-import com.storyart.userservice.dto.UserProfileDto;
 import com.storyart.userservice.model.Story;
 import com.storyart.userservice.model.User;
-import com.storyart.userservice.payload.PagedResponse;
-import com.storyart.userservice.payload.PasswordChangeRequest;
-import com.storyart.userservice.payload.UserInManagementResponse;
-import com.storyart.userservice.payload.UserProfileUpdateRequest;
+import com.storyart.userservice.payload.*;
 import com.storyart.userservice.security.UserPrincipal;
 
 import java.util.List;
@@ -52,4 +48,6 @@ public interface UserService {
     ResultDto getUserProfile(int userId);
 
     boolean changePassword(String password, int userId);
+
+   void register(SignUpRequest signUpRequest);
 }
