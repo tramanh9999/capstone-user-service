@@ -130,7 +130,7 @@
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>2.2.0</version>
                 <configuration>
-                    <deploy.projectId>user-service-275011</deploy.projectId>
+                    <deploy.projectId>user-service-275014</deploy.projectId>
                     <deploy.version>alpha-001</deploy.version>
                 </configuration>
 
